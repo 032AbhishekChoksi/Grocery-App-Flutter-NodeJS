@@ -1,7 +1,7 @@
-const categoriesService = require("../services/categories.service");
-const upload = require("../middleware/category.upload");
+const productsService = require("../services/products.service");
+const upload = require("../middleware/product.upload");
 
-// Create and Save a new Category
+// Create and Save a new Product
 exports.create = (req, res, next) => {
     upload(req, res, function (err) {
         if (err) {
@@ -10,12 +10,19 @@ exports.create = (req, res, next) => {
             const path = req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
             var model = {
-                categoryName: req.body.categoryName,
-                categoryDescription: req.body.categoryDescription,
-                categoryImage: path != "" ? "/" + path : ""
+                productName: req.body.productName,
+                category: req.body.category,
+                productShortDescription: req.body.productShortDescription,
+                productDescription: req.body.productDescription,
+                productPrice: req.body.productPrice,
+                productSalePrice: req.body.productSalePrice,
+                productSKU: req.body.productSKU,
+                productType: req.body.productType,
+                stockStatus: req.body.stockStatus,
+                productImage: path != "" ? "/" + path : ""
             };
 
-            categoriesService.createCategory(model, (error, results) => {
+            productsService.createProduct(model, (error, results) => {
                 if (error) {
                     return next(error);
                 } else {
@@ -29,15 +36,16 @@ exports.create = (req, res, next) => {
     });
 }
 
-// Retrieve all Categories from the database.
+// Retrieve all Products from the database.
 exports.findAll = (req, res, next) => {
     var model = {
-        categoryName: req.query.categoryName,
+        productName: req.query.productName,
+        categoryId: req.query.categoryId,
         pageSize: req.query.pageSize,
         page: req.query.page
     };
 
-    categoriesService.getCategories(model, (error, results) => {
+    productsService.getProducts(model, (error, results) => {
         if (error) {
             return next(error);
         } else {
@@ -52,10 +60,10 @@ exports.findAll = (req, res, next) => {
 // Find a single category with an id
 exports.findOne = (req, res, next) => {
     var model = {
-        categoryId: req.params.id
+        productId: req.params.id,
     };
 
-    categoriesService.getCategoryById(model, (error, results) => {
+    productsService.getProductById(model, (error, results) => {
         if (error) {
             return next(error);
         } else {
@@ -67,7 +75,7 @@ exports.findOne = (req, res, next) => {
     });
 }
 
-// Update a Category by the id in the request
+// Update a Product by the id in the request
 exports.update = (req, res, next) => {
     upload(req, res, function (err) {
         if (err) {
@@ -76,13 +84,20 @@ exports.update = (req, res, next) => {
             const path = req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
             var model = {
-                categoryId: req.params.categoryId,
-                categoryName: req.body.categoryName,
-                categoryDescription: req.body.categoryDescription,
-                categoryImage: path != "" ? "/" + path : ""
+                productId: req.params.id,
+                productName: req.body.productName,
+                category: req.body.category,
+                productShortDescription: req.body.productShortDescription,
+                productDescription: req.body.productDescription,
+                productPrice: req.body.productPrice,
+                productSalePrice: req.body.productSalePrice,
+                productSKU: req.body.productSKU,
+                productType: req.body.productType,
+                stockStatus: req.body.stockStatus,
+                productImage: path != "" ? "/" + path : ""
             };
 
-            categoriesService.updateCategory(model, (error, results) => {
+            productsService.updateProduct(model, (error, results) => {
                 if (error) {
                     return next(error);
                 } else {
@@ -96,13 +111,13 @@ exports.update = (req, res, next) => {
     });
 }
 
-// Delete a Category with the specified id in the request
+// Delete a Product with the specified id in the request
 exports.delete = (req, res, next) => {
     var model = {
-        categoryId: req.params.id
+        productId: req.params.id
     };
 
-    categoriesService.deleteCategory(model, (error, results) => {
+    productsService.deleteProduct(model, (error, results) => {
         if (error) {
             return next(error);
         } else {

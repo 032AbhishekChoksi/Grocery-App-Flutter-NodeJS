@@ -1,4 +1,5 @@
 function errorHandler(err, req, res, next) {
+    console.error(err);
     if (typeof err === "string") {
         // custom application error
         return res.status(400).json({ message: err });
