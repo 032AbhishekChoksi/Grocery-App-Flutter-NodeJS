@@ -1,6 +1,7 @@
 const categoryController = require("../controllers/categories.controller");
 const productsController = require("../controllers/products.controller");
 const usersController = require("../controllers/users.controller");
+const sliderController = require("../controllers/slider.controller");
 const express = require("express");
 const router = express.Router();
 
@@ -39,5 +40,20 @@ router.post("/register", usersController.register);
 
 // Login User
 router.post("/login", usersController.login);
+
+// Create a new Slider
+router.post("/slider", sliderController.create);
+
+// Retrieve all Slider
+router.get("/slider", sliderController.findAll);
+
+// Retrieve a single Slider with id
+router.get("/slider/:id", sliderController.findOne);
+
+// Update a Slider with id
+router.put("/slider/:id", sliderController.update);
+
+// Delete a Slider with id
+router.delete("/slider/:id", sliderController.delete);
 
 module.exports = router;
