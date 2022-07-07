@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors")
 const mongoose = require("mongoose");
 const { MONGO_DB_CONFIG } = require("./config/app.config");
 const errors = require("./middleware/errors.js");
@@ -29,7 +30,7 @@ mongoose.connect(MONGO_DB_CONFIG.DB, {
 );
 
 app.use(express.json());
-
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
 // initialize routes
