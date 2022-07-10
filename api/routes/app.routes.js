@@ -2,6 +2,7 @@ const categoryController = require("../controllers/categories.controller");
 const productsController = require("../controllers/products.controller");
 const usersController = require("../controllers/users.controller");
 const sliderController = require("../controllers/slider.controller");
+const relatedProductController = require("../controllers/related-product.controller");
 const express = require("express");
 const router = express.Router();
 
@@ -55,5 +56,11 @@ router.put("/slider/:id", sliderController.update);
 
 // Delete a Slider with id
 router.delete("/slider/:id", sliderController.delete);
+
+// Create a new Related Product
+router.post("/relatedProduct", relatedProductController.create);
+
+// Delete a Related Product with id
+router.delete("/relatedProduct/:id", relatedProductController.delete);
 
 module.exports = router;
