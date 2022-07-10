@@ -4,8 +4,8 @@ const cors = require("cors")
 const mongoose = require("mongoose");
 const { MONGO_DB_CONFIG } = require("./config/app.config");
 const errors = require("./middleware/errors.js");
-const auth = require("./middleware/auth");
-const { unless } = require("express-unless");
+// const auth = require("./middleware/auth");
+// const { unless } = require("express-unless");
 const swaggerUi = require("swagger-ui-express"), swaggerDocument = require("./swagger.json");
 
 // connect to mongodb
@@ -35,16 +35,16 @@ app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
-// initialize JWT Authentication
-auth.authenticationToken.unless = unless;
-app.use(
-    auth.authenticationToken.unless({
-        path: [
-            { url: "/api/login", methods: ["POST"] },
-            { url: "/api/resgistration", methods: ["POST"] }
-        ]
-    })
-);
+// // initialize JWT Authentication
+// auth.authenticationToken.unless = unless;
+// app.use(
+//     auth.authenticationToken.unless({
+//         path: [
+//             { url: "/api/login", methods: ["POST"] },
+//             { url: "/api/resgistration", methods: ["POST"] }
+//         ]
+//     })
+// );
 
 // initialize routes
 app.use("/api", require("./routes/app.routes"));
