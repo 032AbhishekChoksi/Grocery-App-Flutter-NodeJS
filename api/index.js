@@ -4,6 +4,7 @@ const cors = require("cors")
 const mongoose = require("mongoose");
 const { MONGO_DB_CONFIG } = require("./config/app.config");
 const errors = require("./middleware/errors.js");
+const ip = require("ip");
 // const auth = require("./middleware/auth");
 // const { unless } = require("express-unless");
 const swaggerUi = require("swagger-ui-express"), swaggerDocument = require("./swagger.json");
@@ -56,4 +57,5 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // listen for requests
 app.listen(process.env.port || 4000, function () {
     console.log("Ready to Go!");
+    console.log("IP Address : ", ip.address());
 });
