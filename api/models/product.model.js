@@ -55,7 +55,7 @@ const product = mongoose.model(
         },
         {
             toJSON: {
-                tranform: function (doc, ret) {
+                transform: function (doc, ret) {
                     ret.productId = ret._id.toString();
                     delete ret._id;
                     delete ret.__v;

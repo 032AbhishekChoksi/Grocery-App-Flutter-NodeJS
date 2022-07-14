@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grocery_app/models/category.dart';
 import 'package:grocery_app/models/pagination.dart';
-import 'package:grocery_app/providers/category_provider.dart';
+import 'package:grocery_app/providers/providers.dart';
 
 class HomeCategoriesWidget extends ConsumerWidget {
   const HomeCategoriesWidget({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class HomeCategoriesWidget extends ConsumerWidget {
         return _buildCategoryList(list!);
       },
       error: (_, __) => const Center(
-        child: Text("ERR"),
+        child: Text("ERROR"),
       ),
       loading: () => const Center(
         child: CircularProgressIndicator(),
